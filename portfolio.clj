@@ -79,20 +79,41 @@
 
 (println portfolio)
 
+;produces four weights that add up to 1
+(defn get-weights
+  []
+  (let [w1 (rand)
+        w2 (rand (- 1 w1))
+        w3 (rand (- 1 w1 w2))
+        w4 (- 1 (+ w1 w2 w3))]
+    [w1 w2 w3 w4]))
+(get-weights)
+(def weights (get-weights))
+(get weights 0)
+(get weights 1)
+(get weights 2)
+(get weights 3)
+
+;shows the weights adding to one work
+(+ (get weights 0)
+(get weights 1)
+(get weights 2)
+(get weights 3))
+
 
 (defn calculatePortfolioReturns 
-  [portfolio realEstatePct privateEquityPct publicSecuritiesPct inflationaryHedgePct totalCash]
-  (let [realEstateAlloc (* totalCash realEstatePct)
-        privateEquityAlloc (* totalCash privateEquityPct)
-        publicSecuritiesAlloc (* totalCash publicSecuritiesPct)
-        inflationaryHedgeAlloc (* totalCash inflationaryHedgePct)
+  [portfolio totalCash]
+  (let [realEstateAlloc (* totalCash (get weights 0))
+        privateEquityAlloc (* totalCash (get weights 1))
+        publicSecuritiesAlloc (* totalCash (get weights 2))
+        inflationaryHedgeAlloc (* totalCash (get weights 3))
         realEstateReturns (map #(* realEstateAlloc (* %1 0.5)) (vals (get portfolio "Real Estate")))
         privateEquityReturns (map #(* privateEquityAlloc (* %1 0.5)) (vals (get portfolio "Private Equity")))
         publicSecuritiesReturns (map #(* publicSecuritiesAlloc (* %1 0.5)) (vals (get portfolio "Public Securities")))
         inflationaryHedgeReturns (map #(* inflationaryHedgeAlloc (* %1 0.5)) (vals (get portfolio "Inflationary Hedge")))]
     (reduce + (concat realEstateReturns privateEquityReturns publicSecuritiesReturns inflationaryHedgeReturns))))
 
-(calculatePortfolioReturns portfolio 0.3 0.2 0.3 0.2 100000)
+(calculatePortfolioReturns portfolio 100000)
 
 ;get the specific buckets
 (get portfolio "Real Estate")
@@ -109,5 +130,8 @@
 (nth (get portfolio "Public Securities") 1)
 (nth (get portfolio "Inflationary Hedge") 0)
 (nth (get portfolio "Inflationary Hedge") 1)
+
+
+
 
 
