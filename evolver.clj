@@ -1,4 +1,4 @@
-(ns proj.evolver)
+(ns finalprojectcode.evolver)
 
 (require 'clojure.core)
 
@@ -121,8 +121,6 @@
    "Inflationary Hedge" (take 2 (shuffle (seq (:inflationaryHedge portlist))))})
 
 
-
-
 ;;;---Interior Tools--------------
 
 (defn evalport
@@ -200,6 +198,7 @@
        (map :socialImpact)                ; Retrieve social impacts
        (vec)))
 
+
 (defn calculate-sums 
   "Also Used in Social Grade
    adds every 2 numbers together"
@@ -208,6 +207,7 @@
        (partition 2)        ; Partition the input vector into pairs
        (map #(apply + %))))
 
+
 (defn multiply-by-position 
   "Also used in social grade
    Multiply four #s by another 4"
@@ -215,6 +215,7 @@
   (map-indexed (fn [index value]
                  (* value (nth vector2 index)))
                vector1))
+
 
 (defn social-grade 
   "Calculates the overall social grade of a portfolio
@@ -340,9 +341,10 @@
                              (drop (inc crossover-point) weights2))
         new-weights2 (concat (take (inc crossover-point) weights2)
                              (drop (inc crossover-point) weights1))
-        total-sum (apply + new-weights1)
-        normalized-weights1 (mapv #(/ % total-sum) new-weights1)
-        normalized-weights2 (mapv #(/ % total-sum) new-weights2)
+        total-sum1 (apply + new-weights1)
+        total-sum2 (apply + new-weights2)
+        normalized-weights1 (mapv #(/ % total-sum1) new-weights1)
+        normalized-weights2 (mapv #(/ % total-sum2) new-weights2)
         x1 (repeatedly 100 #(calculatePortfolioReturns
                              (evalport (:port-params w1))
                              totalcash
