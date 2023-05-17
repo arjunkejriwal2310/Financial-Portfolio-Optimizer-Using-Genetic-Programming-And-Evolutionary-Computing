@@ -1,27 +1,118 @@
 (ns proj.evolver)
 
 
-(def createPortfolio2
+(def createPortfolio
   ;Portfolio Parameters, preventing evaluation of returns
-  {:realEstate {"RE fund I" '(+ 0.9 (* 0.35 (rand)))
-                "RE fund II" '(+ 0.9 (* 0.35 (rand)))
-                "Direct Investment I" '(+ 0.8 (* 0.6 (rand)))
-                "Direct Investment II" '(+ 0.8 (* 0.6 (rand)))
-                "REIT I" '(+ 0.95 (* 0.15 (rand)))
-                "REIT II" '(+ 0.95 (* 0.15 (rand)))}
-   :privateEquity {"PE Fund I" '(+ 0.9 (* 0.3 (rand)))
-                   "PE Fund II" '(+ 0.9 (* 0.35 (rand)))
-                   "VC Fund I" '(+ 0.75 (* 0.75 (rand)))
-                   "VC Fund II" '(+ 0.75 (* 0.68 (rand)))}
-   :publicSecurities {"Stock I" '(+ 0.95 (* 0.19 (rand)))
-                      "Stock II" '(+ 0.95 (* 0.19 (rand)))
-                      "Stock III" '(+ 0.95 (* 0.19 (rand)))
-                      "Stock IV" '(+ 0.95 (* 0.18 (rand)))}
+  {:realEstate {"RE fund I" '(+ 0.9 (* 0.35 (rand))) 
+                "RE fund II" '(+ 0.9 (* 0.35 (rand))) 
+                "Direct Investment I" '(+ 0.8 (* 0.6 (rand))) 
+                "Direct Investment II" '(+ 0.8 (* 0.6 (rand))) 
+                "REIT I" '(+ 0.95 (* 0.15 (rand))) 
+                "REIT II" '(+ 0.95 (* 0.15 (rand)))} 
+   :privateEquity {"PE Fund I" '(+ 0.9 (* 0.3 (rand))) 
+                   "PE Fund II" '(+ 0.9 (* 0.35 (rand))) 
+                   "VC Fund I" '(+ 0.75 (* 0.75 (rand))) 
+                   "VC Fund II" '(+ 0.75 (* 0.68 (rand)))} 
+   :publicSecurities {"Stock I" '(+ 0.95 (* 0.19 (rand))) 
+                      "Stock II" '(+ 0.95 (* 0.19 (rand))) 
+                      "Stock III" '(+ 0.95 (* 0.19 (rand))) 
+                      "Stock IV" '(+ 0.95 (* 0.18 (rand))) } 
    :inflationaryHedge {"3 Month Bond" 1.05
                        "6 Month Bond" 1.06
                        "12 Month Bond" 1.065
                        "2 Year Bond" 1.07
                        "5 Year Bond" 1.075}})
+
+(def createPortfolio2
+  {:realEstate {"RE fund I" '(let [r1 (rand)]
+                               (cond
+                                 (< r1 0.125) (+ -0.5 (rand 0.5))
+                                 (< r1 0.25) (rand 0.9)
+                                 (< r1 0.75) (+ 0.9 (rand 0.35))
+                                 :else (+ 1.25 (rand 0.5))))
+                "RE fund II" '(let [r1 (rand)]
+                                (cond
+                                  (< r1 0.125) (+ -0.5 (rand 0.5))
+                                  (< r1 0.25) (rand 0.9)
+                                  (< r1 0.75) (+ 0.9 (rand 0.35))
+                                  :else (+ 1.25 (rand 0.5))))
+                "Direct Investment I" '(let [r1 (rand)]
+                                         (cond
+                                           (< r1 0.125) (+ -0.5 (rand 0.5))
+                                           (< r1 0.25) (rand 0.9)
+                                           (< r1 0.75) (+ 0.9 (rand 0.35))
+                                           :else (+ 1.25 (rand 0.5))))
+                "Direct Investment II" '(let [r1 (rand)]
+                                          (cond
+                                            (< r1 0.125) (+ -0.5 (rand 0.5))
+                                            (< r1 0.25) (rand 0.9)
+                                            (< r1 0.75) (+ 0.9 (rand 0.35))
+                                            :else (+ 1.25 (rand 0.5))))
+                "REIT I" '(let [r1 (rand)]
+                            (cond
+                              (< r1 0.125) (+ -0.5 (rand 0.5))
+                              (< r1 0.25) (rand 0.9)
+                              (< r1 0.75) (+ 0.9 (rand 0.35))
+                              :else (+ 1.25 (rand 0.5))))
+                "REIT II" '(let [r1 (rand)]
+                             (cond
+                               (< r1 0.125) (+ -0.5 (rand 0.5))
+                               (< r1 0.25) (rand 0.9)
+                               (< r1 0.75) (+ 0.9 (rand 0.35))
+                               :else (+ 1.25 (rand 0.5))))}
+   :privateEquity {"PE Fund I" '(let [r1 (rand)]
+                                 (cond
+                                   (< r1 0.125) (+ -0.5 (rand 0.5))
+                                   (< r1 0.25) (rand 0.9)
+                                   (< r1 0.75) (+ 0.9 (rand 0.35))
+                                   :else (+ 1.25 (rand 0.5))))
+                  "PE Fund II" '(let [r1 (rand)]
+                                  (cond
+                                    (< r1 0.125) (+ -0.5 (rand 0.5))
+                                    (< r1 0.25) (rand 0.9)
+                                    (< r1 0.75) (+ 0.9 (rand 0.35))
+                                    :else (+ 1.25 (rand 0.5))))
+                  "VC Fund I" '(let [r1 (rand)]
+                                 (cond
+                                   (< r1 0.125) (+ -0.5 (rand 0.5))
+                                   (< r1 0.25) (rand 0.9)
+                                   (< r1 0.75) (+ 0.9 (rand 0.35))
+                                   :else (+ 1.25 (rand 0.5))))
+                  "VC Fund II" '(let [r1 (rand)]
+                                  (cond
+                                    (< r1 0.125) (+ -0.5 (rand 0.5))
+                                    (< r1 0.25) (rand 0.9)
+                                    (< r1 0.75) (+ 0.9 (rand 0.35))
+                                    :else (+ 1.25 (rand 0.5))))}
+   :publicSecurities {"Stock I" '(let [r1 (rand)]
+                                  (cond
+                                    (< r1 0.125) (+ -0.5 (rand 0.5))
+                                    (< r1 0.25) (rand 0.9)
+                                    (< r1 0.75) (+ 0.9 (rand 0.35))
+                                    :else (+ 1.25 (rand 0.5))))
+                     "Stock II" '(let [r1 (rand)]
+                                   (cond
+                                     (< r1 0.125) (+ -0.5 (rand 0.5))
+                                     (< r1 0.25) (rand 0.9)
+                                     (< r1 0.75) (+ 0.9 (rand 0.35))
+                                     :else (+ 1.25 (rand 0.5))))
+                     "Stock III" '(let [r1 (rand)]
+                                    (cond
+                                      (< r1 0.125) (+ -0.5 (rand 0.5))
+                                      (< r1 0.25) (rand 0.9)
+                                      (< r1 0.75) (+ 0.9 (rand 0.35))
+                                      :else (+ 1.25 (rand 0.5))))
+                     "Stock IV" '(let [r1 (rand)]
+                                   (cond
+                                     (< r1 0.125) (+ -0.5 (rand 0.5))
+                                     (< r1 0.25) (rand 0.9)
+                                     (< r1 0.75) (+ 0.9 (rand 0.35))
+                                     :else (+ 1.25 (rand 0.5))))}
+   :inflationaryHedge {"3 Month Bond" 1.05
+                      "6 Month Bond" 1.06
+                      "12 Month Bond" 1.065
+                      "2 Year Bond" 1.07
+                      "5 Year Bond" 1.075}})
 
 ;This creates a random portfolio creation that takes 2 investments from each bucket
 (defn genp [portlist]
@@ -66,9 +157,9 @@
         privateEquityAlloc (* totalCash (nth alloc 1))
         publicSecuritiesAlloc (* totalCash (nth alloc 2))
         inflationaryHedgeAlloc (* totalCash (nth alloc 3))
-        realEstateReturns (map #(* realEstateAlloc (* %1 0.5)) (filter number? (flatten (get portfolio "Real Estate"))))
-        privateEquityReturns (map #(* privateEquityAlloc (* %1 0.5)) (filter number? (flatten (get portfolio "Private Equity"))))
-        publicSecuritiesReturns (map #(* publicSecuritiesAlloc (* %1 0.5)) (filter number? (flatten (get portfolio "Public Securities"))))
+        realEstateReturns (map #(* realEstateAlloc (* %1 0.5)) (map #(+ 1 %) (filter number? (flatten (get portfolio "Real Estate")))))
+        privateEquityReturns (map #(* privateEquityAlloc (* %1 0.5)) (map #(+ 1 %) (filter number? (flatten (get portfolio "Private Equity")))))
+        publicSecuritiesReturns (map #(* publicSecuritiesAlloc (* %1 0.5)) (map #(+ 1 %) (filter number? (flatten (get portfolio "Public Securities")))))
         inflationaryHedgeReturns (map #(* inflationaryHedgeAlloc (* %1 0.5)) (filter number? (flatten (get portfolio "Inflationary Hedge"))))]
     (reduce + (concat realEstateReturns privateEquityReturns publicSecuritiesReturns inflationaryHedgeReturns))))
 
@@ -97,7 +188,7 @@
     {:genome weights :port-params port 
      :avg-return (/ (reduce + x) 100) 
      :risk (standard-deviation x)
-     :diversity (* (rand) 5)}  ;Placeholder
+     :diversity (standard-deviation weights)}  ;Placeholder
     ))
 
 
@@ -162,24 +253,22 @@
   [individual totalcash]
   (if (< (rand) 1)
     (let [x (:genome individual)
-          port (:port-params individual)]
-      (let [y (vec (map + x (shuffle (mutators))))]
+          port (:port-params individual)
+      y (vec (map + x (shuffle (mutators))))]
         (if (some #(neg? %)  y)
           (mutate individual totalcash)
-          (let [x (repeatedly 100 #(try (calculatePortfolioReturns
+          (let [x (repeatedly 100 #(calculatePortfolioReturns
                                     (evalport port)
                                     totalcash
-                                    y) 
-                                        (catch Exception e
-                                          (println port))))]
+                                    y))]
             {:genome y :port-params port
              :avg-return (/ (reduce + x) 100)
              :risk (standard-deviation x)
-             :diversity 1}))))
+             :diversity 1})))
     individual))
 
 (defn taken 
-  "Takes 5 from pop using lexi"
+  "Takes n from pop using lexi"
   [pop, returners, gen, n]
   (let [x (lexi pop cases)]
     (if (= gen (+ n 1))
@@ -189,26 +278,32 @@
 (defn evolve
   "Run Evolution Algorithm"
   [population gens totalcash]
+  (spit "running.txt" (str "\n----NEW RUN----\npopsize: "(count population)
+                           "\ngens: " gens
+                           "\nstarting cash: " totalcash "\n"))
   (loop [generation 0
          population population]
-    (let [best (lexi population cases)]
-      (print "\nGeneration: " generation
-             "\nAvg-Return: " (:avg-return best)
-             "\nRisk: " (:risk best)
-             "\nDiversity: " (:diversity best)
-             "\n")
+    (let [best (lexi population cases)
+          printout (str "\nGeneration: " generation
+                        "\nAvg-Return: " (:avg-return best)
+                        "\nRisk: " (:risk best)
+                        "\nDiversity: " (:diversity best)
+                        "\n")]
+      (println printout)
+      (spit "running.txt" printout :append true)
       (if (= gens generation)
         best
         (let [better-half
-              (taken population () 0 (/ (count population) 2))]
+              (taken population () 0 (- (/ (count population) 2) 1))]
           (recur
            (inc generation)
-           (do (println population) (map #(mutate % totalcash)
-                (conj better-half better-half) ))))))))
+           (map #(mutate % totalcash)
+                (concat (list best) better-half (drop-last better-half)))))))))
 
 
 ;;;---Run evolution with new portfolio parameters
-(evolve (take 10 (repeatedly #(make-individual (genp createPortfolio2) 10000))) 10 10000)
+(evolve (take 6 (repeatedly #(make-individual (genp createPortfolio2) 10000))) 20 10000)
+
 
 
 
