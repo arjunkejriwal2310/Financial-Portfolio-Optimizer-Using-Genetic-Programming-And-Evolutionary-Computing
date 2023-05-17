@@ -213,7 +213,7 @@
 ;;;---------Selection and Genetic Operators ---------
 
 
-(defn lexi   ;NOT YET WORKING
+(defn lexi  
   "Run Lexicase Selection Algorithm"
   [pop, casein]
   (if (empty? casein) (rand-nth pop)
@@ -251,7 +251,7 @@
 (defn mutate 
   "Mutate an individual's weights -DIVERSITY NOT YET IMPLEMENTED"
   [individual totalcash]
-  (if (< (rand) 1)
+  (if (< (rand) 0.5)
     (let [x (:genome individual)
           port (:port-params individual)
       y (vec (map + x (shuffle (mutators))))]
@@ -264,7 +264,7 @@
             {:genome y :port-params port
              :avg-return (/ (reduce + x) 100)
              :risk (standard-deviation x)
-             :diversity 1})))
+             :diversity (standard-deviation y)})))
     individual))
 
 (defn taken 
@@ -302,7 +302,7 @@
 
 
 ;;;---Run evolution with new portfolio parameters
-(evolve (take 6 (repeatedly #(make-individual (genp createPortfolio2) 10000))) 20 10000)
+(evolve (take 4 (repeatedly #(make-individual (genp createPortfolio2) 10000))) 40 10000)
 
 
 
