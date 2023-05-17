@@ -49,101 +49,121 @@
 
 (def createPortfolio
   ;There is a random return within the average range 
-  (let [realEstate {"RE fund I" (let [r1 (rand)]
+  (let [realEstate {"RE fund I" {:returns(let [r1 (rand)]
                                   (cond
                                     (< r1 0.125) (+ -0.5 (rand 0.5))
                                     (< r1 0.25) (rand 0.9)
                                     (< r1 0.75) (+ 0.9 (rand 0.35))
                                     :else (+ 1.25 (rand 0.5))))
-                    "RE fund II" (let [r1 (rand)]
-                                   (cond
-                                     (< r1 0.125) (+ -0.5 (rand 0.5))
-                                     (< r1 0.25) (rand 0.9)
-                                     (< r1 0.75) (+ 0.9 (rand 0.35))
-                                     :else (+ 1.25 (rand 0.5))))
-                    "Direct Investment I" (let [r1 (rand)]
-                                            (cond
-                                              (< r1 0.125) (+ -0.5 (rand 0.5))
-                                              (< r1 0.25) (rand 0.9)
-                                              (< r1 0.75) (+ 0.9 (rand 0.35))
-                                              :else (+ 1.25 (rand 0.5))))
-                    "Direct Investment II" (let [r1 (rand)]
+                                 :socialImpact 0.34}
+                    
+                    "RE fund II" {:returns (let [r1 (rand)]
                                              (cond
-                                               (< r1 0.125) (+ -0.5 (rand 0.5))
-                                               (< r1 0.25) (rand 0.9)
-                                               (< r1 0.75) (+ 0.9 (rand 0.35))
+                                               (< r1 0.10) (+ -0.5 (rand 0.5))
+                                               (< r1 0.20) (rand 0.9)
+                                               (< r1 0.70) (+ 0.9 (rand 0.35))
                                                :else (+ 1.25 (rand 0.5))))
-                    "REIT I" (let [r1 (rand)]
-                               (cond
-                                 (< r1 0.125) (+ -0.5 (rand 0.5))
-                                 (< r1 0.25) (rand 0.9)
-                                 (< r1 0.75) (+ 0.9 (rand 0.35))
-                                 :else (+ 1.25 (rand 0.5))))
-                    "REIT II" (let [r1 (rand)]
-                                (cond
-                                  (< r1 0.125) (+ -0.5 (rand 0.5))
-                                  (< r1 0.25) (rand 0.9)
-                                  (< r1 0.75) (+ 0.9 (rand 0.35))
-                                  :else (+ 1.25 (rand 0.5))))}
-        privateEquity {"PE Fund I" (let [r1 (rand)]
-                                     (cond
-                                       (< r1 0.125) (+ -0.5 (rand 0.5))
-                                       (< r1 0.25) (rand 0.9)
-                                       (< r1 0.75) (+ 0.9 (rand 0.35))
-                                       :else (+ 1.25 (rand 0.5))))
-                       "PE Fund II" (let [r1 (rand)]
-                                      (cond
-                                        (< r1 0.125) (+ -0.5 (rand 0.5))
-                                        (< r1 0.25) (rand 0.9)
-                                        (< r1 0.75) (+ 0.9 (rand 0.35))
-                                        :else (+ 1.25 (rand 0.5))))
-                       "VC Fund I" (let [r1 (rand)]
-                                     (cond
-                                       (< r1 0.125) (+ -0.5 (rand 0.5))
-                                       (< r1 0.25) (rand 0.9)
-                                       (< r1 0.75) (+ 0.9 (rand 0.35))
-                                       :else (+ 1.25 (rand 0.5))))
-                       "VC Fund II" (let [r1 (rand)]
-                                      (cond
-                                        (< r1 0.125) (+ -0.5 (rand 0.5))
-                                        (< r1 0.25) (rand 0.9)
-                                        (< r1 0.75) (+ 0.9 (rand 0.35))
-                                        :else (+ 1.25 (rand 0.5))))}
-        publicSecurities {"Stock I" (let [r1 (rand)]
-                                      (cond
-                                        (< r1 0.125) (+ -0.5 (rand 0.5))
-                                        (< r1 0.25) (rand 0.9)
-                                        (< r1 0.75) (+ 0.9 (rand 0.35))
-                                        :else (+ 1.25 (rand 0.5))))
-                          "Stock II" (let [r1 (rand)]
-                                       (cond
-                                         (< r1 0.125) (+ -0.5 (rand 0.5))
-                                         (< r1 0.25) (rand 0.9)
-                                         (< r1 0.75) (+ 0.9 (rand 0.35))
-                                         :else (+ 1.25 (rand 0.5))))
-                          "Stock III" (let [r1 (rand)]
-                                        (cond
-                                          (< r1 0.125) (+ -0.5 (rand 0.5))
-                                          (< r1 0.25) (rand 0.9)
-                                          (< r1 0.75) (+ 0.9 (rand 0.35))
-                                          :else (+ 1.25 (rand 0.5))))
-                          "Stock IV" (let [r1 (rand)]
-                                       (cond
-                                         (< r1 0.125) (+ -0.5 (rand 0.5))
-                                         (< r1 0.25) (rand 0.9)
-                                         (< r1 0.75) (+ 0.9 (rand 0.35))
-                                         :else (+ 1.25 (rand 0.5))))}
-        inflationaryHedge {"3 Month Bond" 1.05
-                           "6 Month Bond" 1.06
-                           "12 Month Bond" 1.065
-                           "2 Year Bond" 1.07
-                           "5 Year Bond" 1.075}]
+                                  :socialImpact 0.45}
+                    "Direct Investment I" {:returns(let [r1 (rand)]
+                                  (cond
+                                    (< r1 0.15) (+ -0.5 (rand 0.5))
+                                    (< r1 0.25) (rand 0.9)
+                                    (< r1 0.80) (+ 0.9 (rand 0.35))
+                                    :else (+ 1.25 (rand 0.5))))
+                                 :socialImpact 0.78}
+                    "Direct Investment II" {:returns (let [r1 (rand)]
+                                                       (cond
+                                                         (< r1 0.08) (+ -0.5 (rand 0.5))
+                                                         (< r1 0.20) (rand 0.9)
+                                                         (< r1 0.65) (+ 0.9 (rand 0.35))
+                                                         :else (+ 1.25 (rand 0.5))))
+                                            :socialImpact 0.89}
+                    "REIT I" {:returns (let [r1 (rand)]
+                                         (cond
+                                           (< r1 0.18) (+ -0.5 (rand 0.5))
+                                           (< r1 0.30) (rand 0.9)
+                                           (< r1 0.60) (+ 0.9 (rand 0.35))
+                                           :else (+ 1.25 (rand 0.5))))
+                              :socialImpact 0.67}
+                    "REIT II" {:returns (let [r1 (rand)]
+                                          (cond
+                                            (< r1 0.10) (+ -0.5 (rand 0.5))
+                                            (< r1 0.30) (rand 0.9)
+                                            (< r1 0.70) (+ 0.9 (rand 0.35))
+                                            :else (+ 1.25 (rand 0.5))))
+                               :socialImpact 0.78}}
+        privateEquity {"PE Fund I" {:returns (let [r1 (rand)]
+                                               (cond
+                                                 (< r1 0.14) (+ -0.5 (rand 0.5))
+                                                 (< r1 0.29) (rand 0.9)
+                                                 (< r1 0.71) (+ 0.9 (rand 0.35))
+                                                 :else (+ 1.25 (rand 0.5))))
+                                    :socialImpact 0.36}
+                       "PE Fund II" {:returns (let [r1 (rand)]
+                                                (cond
+                                                  (< r1 0.15) (+ -0.5 (rand 0.5))
+                                                  (< r1 0.31) (rand 0.9)
+                                                  (< r1 0.89) (+ 0.9 (rand 0.35))
+                                                  :else (+ 1.25 (rand 0.5))))
+                                     :socialImpact 0.24}
+                       "VC Fund I" {:returns (let [r1 (rand)]
+                                               (cond
+                                                 (< r1 0.16) (+ -0.5 (rand 0.5))
+                                                 (< r1 0.23) (rand 0.9)
+                                                 (< r1 0.68) (+ 0.9 (rand 0.35))
+                                                 :else (+ 1.25 (rand 0.5))))
+                                    :socialImpact 0.49}
+                       "VC Fund II" {:returns (let [r1 (rand)]
+                                                (cond
+                                                  (< r1 0.09) (+ -0.5 (rand 0.5))
+                                                  (< r1 0.18) (rand 0.9)
+                                                  (< r1 0.60) (+ 0.9 (rand 0.35))
+                                                  :else (+ 1.25 (rand 0.5))))
+                                     :socialImpact 0.85}}
+        publicSecurities {"Stock I" {:returns (let [r1 (rand)]
+                                                (cond
+                                                  (< r1 0.19) (+ -0.5 (rand 0.5))
+                                                  (< r1 0.25) (rand 0.9)
+                                                  (< r1 0.83) (+ 0.9 (rand 0.35))
+                                                  :else (+ 1.25 (rand 0.5))))
+                                     :socialImpact 0.2}
+                          "Stock II" {:returns (let [r1 (rand)]
+                                                 (cond
+                                                   (< r1 0.11) (+ -0.5 (rand 0.5))
+                                                   (< r1 0.27) (rand 0.9)
+                                                   (< r1 0.78) (+ 0.9 (rand 0.35))
+                                                   :else (+ 1.25 (rand 0.5))))
+                                      :socialImpact 0.3}
+                          "Stock III" {:returns (let [r1 (rand)]
+                                                  (cond
+                                                    (< r1 0.10) (+ -0.5 (rand 0.5))
+                                                    (< r1 0.20) (rand 0.9)
+                                                    (< r1 0.70) (+ 0.9 (rand 0.35))
+                                                    :else (+ 1.25 (rand 0.5))))
+                                       :socialImpact 0.4}
+                          "Stock IV" {:returns (let [r1 (rand)]
+                                                 (cond
+                                                   (< r1 0.125) (+ -0.5 (rand 0.5))
+                                                   (< r1 0.25) (rand 0.9)
+                                                   (< r1 0.75) (+ 0.9 (rand 0.35))
+                                                   :else (+ 1.25 (rand 0.5))))
+                                      :socialImpact 0.5}}
+        inflationaryHedge {"3 Month Bond" {:returns 1.05
+                                           :socialImpact 0.1}
+                           "6 Month Bond" {:returns 1.06
+                                           :socialImpact 0.1}
+                           "12 Month Bond" {:returns 1.065
+                                            :socialImpact 0.1}
+                           "2 Year Bond" {:returns 1.07
+                                          :socialImpact 0.1}
+                           "5 Year Bond" {:returns 1.075
+                                          :socialImpact 0.1}}]
     ;This creates a random portfolio creation that takes 2 investments from each bucket
     (fn []
       {"Real Estate" (take 2 (shuffle (seq realEstate)))
        "Private Equity" (take 2 (shuffle (seq privateEquity)))
        "Public Securities" (take 2 (shuffle (seq publicSecurities)))
-       "Inflationary Hedge" (take 2 (shuffle (seq inflationaryHedge)))})))
+       "Inflationary Hedge" (take 2 (shuffle (seq inflationaryHedge)))}))) 
 
 (def portfolio (createPortfolio))
 
