@@ -34,4 +34,4 @@ Here is a detailed description of the most important functions defined in the co
 14.	The `crossover` function performs the genetic operation of crossover between two individual weight vectors.
 
 15.	The `evolve` function runs the evolution algorithm on the specified population of weight vectors by repeatedly mutating, crossing-over, and selecting individual weight vectors over multiple pre-specified generations. The function conducts the evolution given a certain amount of initial cash. 
-![image](https://github.com/arjunkejriwal2310/Financial-Portfolio-Optimizer-Using-Genetic-Programming-And-Evolutionary-Computing/assets/73984306/2f1cf728-b29f-4639-a3bf-d57d831a5f99)
+
